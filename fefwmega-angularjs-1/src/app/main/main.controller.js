@@ -18,9 +18,9 @@
     vm.game = FrontEndFrameworksMemoryGame.newGame();
     console.log("new game" + JSON.stringify(vm.game));
     vm.flipTile = function(game, line, column){
-      console.log("flip tile");
+      console.log("[angularjs-1] flipTile: before (game=" + JSON.stringify(game) + ')');
       vm.game = FrontEndFrameworksMemoryGame.flipTile(game, line, column);
-      console.log("flipTile" + JSON.stringify(vm.game));
+      console.log("[angularjs-1] flipTile: after=" + JSON.stringify(vm.game));
     };
 
     activate();

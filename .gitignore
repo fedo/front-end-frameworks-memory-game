@@ -4,3 +4,4 @@ resources/public/js
 .lein-repl-history
 target
 *.iml
+fefwmega-angularjs-1/src/js/compiled

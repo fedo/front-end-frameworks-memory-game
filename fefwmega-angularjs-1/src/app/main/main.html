@@ -10,7 +10,7 @@
       <ng-repeat class="mdl-cell"
                  ng-repeat="tile in tiles"
                  ng-click="main.flipTile(main.game, $parent.$index, $index)">
-        {{ tile["value"] }}
+        {{ (tile["flipped"] || tile["picked"]) ? tile["value"] : '?' }}
       </ng-repeat>
     </div>
 
