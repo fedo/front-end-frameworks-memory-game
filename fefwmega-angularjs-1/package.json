@@ -12,6 +12,7 @@
     "del": "~1.2.0",
     "lodash": "~3.9.3",
     "gulp-csso": "~1.0.0",
+    "gulp-csso": "~1.0.0",
     "gulp-filter": "~2.0.2",
     "gulp-flatten": "~0.0.4",
     "gulp-jshint": "~1.11.0",

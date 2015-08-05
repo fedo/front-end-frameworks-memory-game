@@ -14,6 +14,15 @@
     vm.creationDate = 1438799835762;
     vm.showToastr = showToastr;
 
+    vm.FrontEndFrameworksMemoryGame = FrontEndFrameworksMemoryGame;
+    vm.game = FrontEndFrameworksMemoryGame.newGame();
+    console.log("new game" + JSON.stringify(vm.game));
+    vm.flipTile = function(game, line, column){
+      console.log("flip tile");
+      vm.game = FrontEndFrameworksMemoryGame.flipTile(game, line, column);
+      console.log("flipTile" + JSON.stringify(vm.game));
+    };
+
     activate();
 
     function activate() {
