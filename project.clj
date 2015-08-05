@@ -22,7 +22,8 @@
               :figwheel { :on-jsload "front-end-frameworks-memory-game.test-runner/run" }
 
               :compiler {:main front-end-frameworks-memory-game.core
-                         :optimizations :none
+                         :optimizations :simple
+                         :output-wrapper false
                          :asset-path "js/compiled/out"
                          :output-to "resources/public/js/compiled/front_end_frameworks_memory_game.js"
                          :output-dir "resources/public/js/compiled/out"
