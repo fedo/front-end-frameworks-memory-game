@@ -27,7 +27,7 @@
   (= (:value t1) (:value t2)))
 
 
-(defn pick-first 
+(defn pick-first
   [game [line column]]
   (do (console-debug "first pick")
       (assoc-in game [:cards line column :picked] true)))

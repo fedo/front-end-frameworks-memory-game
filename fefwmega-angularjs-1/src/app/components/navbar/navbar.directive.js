@@ -8,6 +8,7 @@
   /** @ngInject */
   function acmeNavbar() {
     var directive = {
+      replace: true,
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
       scope: {

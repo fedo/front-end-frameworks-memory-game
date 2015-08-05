@@ -1,19 +1,25 @@
-<div class="container">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-  <div>
-    <acme-navbar creationDate="main.creationDate" />
-  </div>
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Front-End Frameworks Memory Game</span>
+    </div>
+  </header>
 
-  <div class="jumbotron">
+  <div class="mdl-layout__content">
+    <div class="page-content">
 
     <div class="mdl-grid" ng-repeat="tiles in main.game.cards">
-      <ng-repeat class="mdl-cell"
+      <ng-repeat class="mdl-cell mdl-typography--text-center"
                  ng-repeat="tile in tiles"
                  ng-click="main.flipTile(main.game, $parent.$index, $index)">
+        <button class="mdl-button mdl-js-button mdl-button--fab">
         {{ (tile["flipped"] || tile["picked"]) ? tile["value"] : '?' }}
+        </button>
       </ng-repeat>
     </div>
-
+    </div>
   </div>
 
 </div>
