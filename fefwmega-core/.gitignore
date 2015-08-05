@@ -1,0 +1,7 @@
+.idea
+resources/public/js
+*.log
+.lein-repl-history
+target
+*.iml
+fefwmega-angularjs-1/src/js/compiled
