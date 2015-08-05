@@ -1,0 +1,6 @@
+.idea
+resources/public/js
+*.log
+.lein-repl-history
+target
+*.iml
