@@ -6,9 +6,18 @@
   (.debug js/console (str "[cljs-memory-game] " (apply str args))))
 
 
-(defn new-game []
-  {:cards [[{:value 1} {:value 1}]
-           [{:value 0} {:value 0}]]})
+(defn new-game
+  ([]
+   {:cards [[{:value 1} {:value 1}]
+            [{:value 0} {:value 0}]]})
+  ([lines columns]
+   (let [n-cards (* lines columns)
+         values (shuffle (concat (range (/ n-cards 2)) (range (/ n-cards 2))))]
+     {:cards (doall (mapv (fn [line]
+                            (mapv (fn [column]
+                                    {:cards (nth values (+ column (* line columns)))})
+                              (range columns)))
+                      (range lines)))})))
 
 
 (defn get-picked-cards-coordinates
@@ -56,7 +65,7 @@
 
 (defn pick-card
   [game line column]
-  (console-debug (str "pick-card: card=[" line "," column "] game="game ))
+  (console-debug (str "pick-card: card=[" line "," column "] game=" game))
   (let [card (get-in game [:cards line column])
         picked (get-picked-cards-coordinates game)
         _ (console-debug (str "pick-card: picked-cards=" picked))]
@@ -87,7 +96,7 @@
 
 
 (aset js/window "FrontEndFrameworksMemoryGame"
-  #js{"newGame" #(clj->js (new-game))
+  #js{"newGame"  #(clj->js (new-game))
       "flipTile" #(clj->js (pick-card (js->clj %1 :keywordize-keys true) %2 %3))})
 
 
