@@ -14,9 +14,7 @@
       <ng-repeat class="mdl-cell mdl-typography--text-center"
                  ng-repeat="tile in tiles"
                  ng-click="main.flipTile(main.game, $parent.$index, $index)">
-        <button class="mdl-button mdl-js-button mdl-button--fab">
-        {{ (tile["flipped"] || tile["picked"]) ? tile["value"] : '?' }}
-        </button>
+          <img ng-src="{{ (tile['flipped'] || tile['picked']) ? main.getCardPicture(tile['value']) : 'assets/images/yeoman.png'}}"/>
       </ng-repeat>
     </div>
     </div>

@@ -1,6 +1,6 @@
 (ns ^:figwheel-load front-end-frameworks-memory-game.game-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [front-end-frameworks-memory-game.game :refer [new-game flip-tile reset-picked-tiles get-picked-tiles-coordinates]]))
+            [front-end-frameworks-memory-game.game :refer [new-game pick-card reset-picked-cards get-picked-cards-coordinates]]))
 
 
 (def game-a {:cards [[{:value "A"} {:value "B"} {:value "B"}]
@@ -20,18 +20,18 @@
 
 
 (deftest get-picked-tiles-coordinates-test
-  (is (= (get-picked-tiles-coordinates game-default)
+  (is (= (get-picked-cards-coordinates game-default)
         []))
-  (is (= (get-picked-tiles-coordinates game-1-picked-tile)
+  (is (= (get-picked-cards-coordinates game-1-picked-tile)
         [[0 0]]))
-  (is (= (get-picked-tiles-coordinates game-2-picked-tiles)
+  (is (= (get-picked-cards-coordinates game-2-picked-tiles)
         [[0 0] [0 1]])))
 
 
 (deftest reset-picked-tiles-test
-  (is (= (reset-picked-tiles game-1-picked-tile [[0 0]])
+  (is (= (reset-picked-cards game-1-picked-tile [[0 0]])
         game-default))
-  (is (= (reset-picked-tiles game-2-picked-tiles [[0 0] [0 1]])
+  (is (= (reset-picked-cards game-2-picked-tiles [[0 0] [0 1]])
         game-default)))
 
 
@@ -39,22 +39,22 @@
 
 
 (deftest game-flow-1
-  (is (= (flip-tile game-a 0 0)
+  (is (= (pick-card game-a 0 0)
         {:cards [[{:value "A" :picked true} {:value "B"} {:value "B"}]
                  [{:value "A"} {:value "C"} {:value "C"}]]})))
 
 
 (deftest double-pick
   (is (= (-> game-a
-           (flip-tile 0 0)
-           (flip-tile 0 0))
+           (pick-card 0 0)
+           (pick-card 0 0))
         {:cards [[{:value "A" :picked true} {:value "B"} {:value "B"}]
                  [{:value "A"} {:value "C"} {:value "C"}]]})))
 
 
 (deftest correct-flip
   (is (= (-> game-a
-           (flip-tile 0 0)
-           (flip-tile 1 0))
+           (pick-card 0 0)
+           (pick-card 1 0))
         {:cards [[{:value "A" :flipped true} {:value "B"} {:value "B"}]
                  [{:value "A" :flipped true} {:value "C"} {:value "C"}]]})))

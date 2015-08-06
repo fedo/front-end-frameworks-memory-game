@@ -1,6 +1,6 @@
 (ns ^:figwheel-load front-end-frameworks-memory-game.game-js-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [front-end-frameworks-memory-game.game :refer [new-game flip-tile reset-picked-tiles get-picked-tiles-coordinates]]))
+            [front-end-frameworks-memory-game.game :refer [new-game pick-card reset-picked-cards get-picked-cards-coordinates]]))
 
 
 (deftest new-game-js

@@ -11,85 +11,83 @@
            [{:value 0} {:value 0}]]})
 
 
-(defn get-picked-tiles-coordinates
+(defn get-picked-cards-coordinates
   [game]
-  (reduce-kv (fn [picks line tiles]
-               ;(console-debug (str "line=" line ", tiles= " tiles))
-               (reduce-kv (fn [picks column tile]
-                            ;(console-debug (str "column=" column ", tile= " tile))
-                            (if (:picked tile)
+  (reduce-kv (fn [picks line cards]
+               (reduce-kv (fn [picks column card]
+                            (if (:picked card)
                               (conj picks [line column])
-                              picks)) picks tiles)) [] (get game :cards)))
+                              picks)) picks cards)) [] (get game :cards)))
 
 
-(defn tiles-matching?
+(defn cards-matching?
   [t1 t2]
   (= (:value t1) (:value t2)))
 
 
-(defn pick-first
+(defn pick-first-card
   [game [line column]]
-  (do (console-debug "first pick")
+  (do (console-debug "pick-first-card: card=[" line "," column "]")
       (assoc-in game [:cards line column :picked] true)))
 
 
-(defn pick-second [game [line2 column2] [line1 column1]]
-  (let [first-picked-tile (get-in game [:cards line1 column1])
-        second-picked-tile (get-in game [:cards line2 column2])]
-    (do (console-debug "second pick")
-        (if (tiles-matching? first-picked-tile second-picked-tile)
-          (do (console-debug "tiles matching")
+(defn pick-second-card [game [line2 column2] [line1 column1]]
+  (let [picked-card-1 (get-in game [:cards line1 column1])
+        picked-card-2 (get-in game [:cards line2 column2])]
+    (do (console-debug "pick-second-card: card=[" line2 "," column2 "]")
+        (if (cards-matching? picked-card-1 picked-card-2)
+          (do (console-debug "pick-second-card: cards matching")
               (-> game
                 (update-in [:cards line1 column1] dissoc :picked)
                 (assoc-in [:cards line1 column1 :flipped] true)
                 (assoc-in [:cards line2 column2 :flipped] true)))
 
-          (do (console-debug "tiles not matching")
+          (do (console-debug "pick-second-card: cards not matching")
               (-> game
                 (assoc-in [:cards line2 column2 :picked] true)))))))
 
 
-(defn reset-picked-tiles
+(defn reset-picked-cards
   [game picked]
   (reduce (fn [game [line column]]
-            (console-debug (str "reset-picked-tiles " line "," column))
+            (console-debug (str "reset-picked-tiles: card=[" line "," column "]"))
             (update-in game [:cards line column] dissoc :picked)) game picked))
 
 
-(defn flip-tile
+(defn pick-card
   [game line column]
-  (console-debug (str "flip-tile: game=" game " flip " line "," column))
-  (let [tile (get-in game [:cards line column])
-        picked (get-picked-tiles-coordinates game)
-        _ (console-debug (str "Already picked: " picked))]
-    (cond (:picked tile)
-          (do (console-debug "already picked, no op") game)
+  (console-debug (str "pick-card: card=[" line "," column "] game="game ))
+  (let [card (get-in game [:cards line column])
+        picked (get-picked-cards-coordinates game)
+        _ (console-debug (str "pick-card: picked-cards=" picked))]
+    (cond (:picked card)
+          (do (console-debug "pick-card: card already picked, nop") game)
 
-          (:flipped tile)
-          (do (console-debug "already flipped, no op") game)
+          (:flipped card)
+          (do (console-debug "pick-card: card already flipped, nop") game)
 
-          (every? nil? (map #(% tile) [:picked :flipped]))
+          (every? nil? (map #(% card) [:picked :flipped]))
           (cond
             (= 0 (count picked))
-            (pick-first game [line column])
+            (pick-first-card game [line column])
 
             (= 1 (count picked))
-            (pick-second game [line column] (first picked))
+            (pick-second-card game [line column] (first picked))
 
             (= 2 (count picked))
             (-> game
-              (reset-picked-tiles picked)
-              (pick-first [line column]))
+              (reset-picked-cards picked)
+              (pick-first-card [line column]))
 
             :default
-            (do (console-debug "flip-tile unhandled, no op") game))
+            (do (console-debug "pick-card: unhandled, nop") game))
 
           :default
-          (do (console-debug "flip-tile unhandled, no op") game))))
+          (do (console-debug "pick-card: unhandled, nop") game))))
 
 
 (aset js/window "FrontEndFrameworksMemoryGame"
   #js{"newGame" #(clj->js (new-game))
-      "flipTile" #(clj->js (flip-tile (js->clj %1 :keywordize-keys true) %2 %3))})
+      "flipTile" #(clj->js (pick-card (js->clj %1 :keywordize-keys true) %2 %3))})
 
 

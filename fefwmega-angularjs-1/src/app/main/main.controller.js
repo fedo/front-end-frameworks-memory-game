@@ -12,16 +12,23 @@
     vm.awesomeThings = [];
     vm.classAnimation = '';
     vm.creationDate = 1438799835762;
-    vm.showToastr = showToastr;
 
     vm.FrontEndFrameworksMemoryGame = FrontEndFrameworksMemoryGame;
     vm.game = FrontEndFrameworksMemoryGame.newGame();
+
+    vm.cardPictures = {1: "assets/images/angular.png",
+    0: "assets/images/gulp.png"};
+    vm.getCardPicture = function(cardValue){
+      return vm.cardPictures[cardValue];
+    };
+
     console.log("new game" + JSON.stringify(vm.game));
     vm.flipTile = function(game, line, column){
       console.log("[angularjs-1] flipTile: before (game=" + JSON.stringify(game) + ')');
       vm.game = FrontEndFrameworksMemoryGame.flipTile(game, line, column);
       console.log("[angularjs-1] flipTile: after=" + JSON.stringify(vm.game));
     };
+
 
     activate();
 
@@ -30,11 +37,6 @@
       $timeout(function() {
         vm.classAnimation = 'rubberBand';
       }, 4000);
-    }
-
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
     }
 
     function getWebDevTec() {
