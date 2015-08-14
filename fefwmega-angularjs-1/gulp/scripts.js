@@ -9,7 +9,7 @@ var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['copy-core-game'], function () {
   gulp.src('../../resources/public/js/**/*.js')
     .pipe(gulp.dest(path.join(conf.paths.src,'/js/')));
   return gulp.src([path.join(conf.paths.src,'/app/**/*.js')])

@@ -29,7 +29,7 @@
                          :source-map-timestamp true }}
              {:id "min"
               :source-paths ["src"]
-              :compiler {:output-to "resources/public/js/fefwmega_core.min.js"
+              :compiler {:output-to "target/fefwmega_core.min.js"
                          :main fefwmega-core.core
                          :optimizations :advanced
                          :pretty-print false}}]}

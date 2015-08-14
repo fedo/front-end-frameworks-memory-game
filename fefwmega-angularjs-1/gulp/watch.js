@@ -22,7 +22,7 @@ gulp.task('watch', ['inject'], function () {
     }
   });
 
-  gulp.watch(path.join(conf.paths.src, '/app/**/*.js'), function(event) {
+  gulp.watch([path.join(conf.paths.src, '/app/**/*.js'), conf.paths.fefwmega_core], function(event) {
     if(isOnlyChange(event)) {
       gulp.start('scripts');
     } else {

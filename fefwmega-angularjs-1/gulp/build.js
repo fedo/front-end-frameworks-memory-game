@@ -90,4 +90,10 @@ gulp.task('clean', function (done) {
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
 
+gulp.task('copy-core-game', function(done){
+  // copy game core
+  return gulp.src(conf.paths.fefwmega_core)
+    .pipe(gulp.dest(path.join(conf.paths.src, '/js/')));
+});
+
 gulp.task('build', ['html', 'fonts', 'other']);
