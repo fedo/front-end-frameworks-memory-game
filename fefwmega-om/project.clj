@@ -1,15 +1,19 @@
-(defproject fefwmega-core "0.1.0-SNAPSHOT"
+(defproject fefwmega-om "0.1.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.28"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]]
+                 [org.clojure/clojurescript "0.0-3297"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [sablono "0.3.4"]
+                 [org.omcljs/om "0.8.8"]
 
-  :plugins [[lein-cljsbuild "1.0.6"]
-            [lein-figwheel "0.3.7"]]
+                 [fefwmega-core "0.1.0-SNAPSHOT"]]
+
+  :plugins [[lein-cljsbuild "1.0.5"]
+            [lein-figwheel "0.3.5"]]
 
   :source-paths ["src"]
 
@@ -17,20 +21,19 @@
 
   :cljsbuild {
     :builds [{:id "dev"
-              :source-paths ["src" "test"]
+              :source-paths ["src"]
 
-              :figwheel { :on-jsload "fefwmega-core.test-runner/run" }
+              :figwheel { :on-jsload "fefwmega-om.core/on-js-reload" }
 
-              :compiler {:main fefwmega-core.core
-                         :optimizations :none
+              :compiler {:main fefwmega-om.core
                          :asset-path "js/compiled/out"
-                         :output-to "resources/public/js/compiled/fefwmega_core.js"
+                         :output-to "resources/public/js/compiled/fefwmega_om.js"
                          :output-dir "resources/public/js/compiled/out"
                          :source-map-timestamp true }}
              {:id "min"
               :source-paths ["src"]
-              :compiler {:output-to "target/fefwmega_core.min.js"
-                         :main fefwmega-core.core
+              :compiler {:output-to "resources/public/js/compiled/fefwmega_om.js"
+                         :main fefwmega-om.core
                          :optimizations :advanced
                          :pretty-print false}}]}
 
@@ -64,4 +67,7 @@
 
              ;; to configure a different figwheel logfile path
              ;; :server-logfile "tmp/logs/figwheel-logfile.log" 
-             })
+             }
+
+  ;:repositories {"local" "file:maven_repository"}
+  )
