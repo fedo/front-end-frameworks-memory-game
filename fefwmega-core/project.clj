@@ -19,18 +19,18 @@
     :builds [{:id "dev"
               :source-paths ["src" "test"]
 
-              :figwheel { :on-jsload "front-end-frameworks-memory-game.test-runner/run" }
+              :figwheel { :on-jsload "fefwmega-core.test-runner/run" }
 
-              :compiler {:main front-end-frameworks-memory-game.core
+              :compiler {:main fefwmega-core.core
                          :optimizations :none
                          :asset-path "js/compiled/out"
-                         :output-to "resources/public/js/compiled/front_end_frameworks_memory_game.js"
+                         :output-to "resources/public/js/compiled/fefwmega_core.js"
                          :output-dir "resources/public/js/compiled/out"
                          :source-map-timestamp true }}
              {:id "min"
               :source-paths ["src"]
-              :compiler {:output-to "resources/public/js/compiled/front_end_frameworks_memory_game.js"
-                         :main front-end-frameworks-memory-game.core
+              :compiler {:output-to "resources/public/js/fefwmega_core.min.js"
+                         :main fefwmega-core.core
                          :optimizations :advanced
                          :pretty-print false}}]}
 

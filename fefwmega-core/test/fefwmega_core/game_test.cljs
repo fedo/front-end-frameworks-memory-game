@@ -1,6 +1,6 @@
-(ns ^:figwheel-load front-end-frameworks-memory-game.game-test
+(ns ^:figwheel-load fefwmega-core.game-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [front-end-frameworks-memory-game.game :refer [new-game pick-card reset-picked-cards get-picked-cards-coordinates]]))
+            [fefwmega-core.game :refer [new-game pick-card reset-picked-cards get-picked-cards-coordinates]]))
 
 
 (def game-a {:cards [[{:value "A"} {:value "B"} {:value "B"}]

@@ -1,5 +1,5 @@
-(ns ^:figwheel-always front-end-frameworks-memory-game.core
-  (:require [front-end-frameworks-memory-game.game :refer [new-game pick-card]]))
+(ns ^:figwheel-always fefwmega-core.core
+  (:require [fefwmega-core.game :refer [new-game pick-card]]))
 
 (enable-console-print!)
 

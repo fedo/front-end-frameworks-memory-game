@@ -1,4 +1,4 @@
-(ns front-end-frameworks-memory-game.game)
+(ns fefwmega-core.game)
 
 
 (defn console-debug
