@@ -1,22 +1,23 @@
 (ns ^:figwheel-always fefwmega-om.core
-    (:require[om.core :as om :include-macros true]
-              [om.dom :as dom :include-macros true]
-              [fefwmega-core.game :as game]))
+  (:require [om.core :as om :include-macros true]
+            [om.dom :as dom :include-macros true]
+            [fefwmega-core.game :as game]
+            [sablono.core :as sab :include-macros true]))
 
 (enable-console-print!)
 
-(println "Edits to this text should show up in your developer console.")
-
-;; define your app data so that it doesn't get over-written on reload
-
-(defonce app-state (atom {:text "Hello world!"}))
+(def app-state (atom {:text "Hello world!"}))
 
 (om/root
   (fn [data owner]
     (reify om/IRender
       (render [_]
         (println (game/new-game))
-        (dom/h1 nil (:text data)))))
+        (sab/html [:div.mdl-layout__container
+                   [:div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+                    [:header.mdl-layout__header.is-casting-shadow
+                     [:div.mdl-layout__header-row
+                      [:span.mdl-layout-title "Front-End Frameworks Memory Game"]]]]]))))
   app-state
   {:target (. js/document (getElementById "app"))})
 
@@ -25,5 +26,5 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+  )
 
