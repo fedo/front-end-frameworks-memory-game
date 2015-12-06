@@ -1,17 +1,20 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-  <header class="mdl-layout__header">
+  <header class="mdl-layout__header mdl-layout__header--transparent">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Front-End Frameworks Memory Game</span>
+      <span class="mdl-layout-title mdl-color-text--red">FEFWMEGA</span>
+    </div>
+    <div class="mdl-layout__drawer-button">
+      <i class="material-icons">menu</i>
     </div>
   </header>
 
   <div class="mdl-layout__content">
-    <div class="page-content">
+    <div class="ffmg-page-content">
 
-    <div class="mdl-grid" ng-repeat="tiles in main.game.cards">
-      <ng-repeat class="mdl-cell mdl-typography--text-center"
+    <div class="ffmg-deck-row" ng-repeat="tiles in main.game.cards">
+      <ng-repeat class="ffmg-card-wrapper"
                  ng-repeat="tile in tiles"
                  ng-click="main.flipTile(main.game, $parent.$index, $index)">
           <img ng-src="{{ (tile['flipped'] || tile['picked']) ? main.getCardPicture(tile['value']) : 'assets/images/yeoman.png'}}"/>

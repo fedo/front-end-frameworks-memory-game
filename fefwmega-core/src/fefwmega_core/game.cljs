@@ -6,9 +6,6 @@
   (.debug js/console (str "[cljs-memory-game] " (apply str args))))
 
 
-
-
-
 (defn new-game
   ([]
    (new-game 4 4))
