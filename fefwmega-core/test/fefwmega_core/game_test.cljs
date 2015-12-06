@@ -12,11 +12,11 @@
 
 
 (def game-1-picked-tile {:cards [[{:value "A" :picked true} {:value "B"}]
-                                  [{:value "A"} {:value "B"}]]})
+                                 [{:value "A"} {:value "B"}]]})
 
 
 (def game-2-picked-tiles {:cards [[{:value "A" :picked true} {:value "B" :picked true}]
-                                   [{:value "A"} {:value "B"}]]})
+                                  [{:value "A"} {:value "B"}]]})
 
 
 (deftest get-picked-tiles-coordinates-test
@@ -36,6 +36,11 @@
 
 
 ;; game
+
+
+(deftest new-game-test
+  ;; add schema validation
+  (is (= nil (new-game 4 4))))
 
 
 (deftest game-flow-1

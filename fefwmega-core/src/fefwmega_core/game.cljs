@@ -6,18 +6,18 @@
   (.debug js/console (str "[cljs-memory-game] " (apply str args))))
 
 
+
+
+
 (defn new-game
   ([]
-   {:cards [[{:value 1} {:value 1} {:value 1} {:value 1}]
-            [{:value 0} {:value 0} {:value 0} {:value 1}]
-            [{:value 2} {:value 2} {:value 0} {:value 1}]
-            [{:value 0} {:value 0} {:value 0} {:value 1}]]})
+   (new-game 4 4))
   ([lines columns]
    (let [n-cards (* lines columns)
          values (shuffle (concat (range (/ n-cards 2)) (range (/ n-cards 2))))]
      {:cards (doall (mapv (fn [line]
                             (mapv (fn [column]
-                                    {:cards (nth values (+ column (* line columns)))})
+                                    {:value (nth values (+ column (* line columns)))})
                               (range columns)))
                       (range lines)))})))
 

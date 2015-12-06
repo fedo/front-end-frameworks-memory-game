@@ -10,7 +10,14 @@
                       :game (game/new-game)}))
 
 (def images
-  ["angular.png" "browsersync.png" "gulp.png" "jasmine.png" "karma.png" "protractor.png"])
+  ["angularjs.png"
+   "clojurescript.png"
+   "css.png"
+   "elm.png"
+   "html.png"
+   "javascript.png"
+   "polymer.png"
+   "react.png"])
 
 (defn card-component
   [data owner]
@@ -62,7 +69,7 @@
                                                    game))}
                                               [:div (str (-> card :selected))]
                                               (let
-                                                [src (str "images/"
+                                                [src (str "images/logos/"
                                                        (get images (:value card)))]
                                                 [:img {:style
                                                        {:height "100%"
@@ -71,7 +78,8 @@
                                                        (if (or (-> card :flipped)
                                                                (-> card :picked))
                                                          src
-                                                         "images/yeoman.png")}])]))
+                                                         "images/card-bg.png")}]
+                                                )]))
                                            line))))
                              cards)))]]])))))
   app-state
