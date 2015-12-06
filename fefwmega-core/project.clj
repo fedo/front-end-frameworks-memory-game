@@ -2,7 +2,7 @@
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+            :url  "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.28"]
@@ -16,23 +16,23 @@
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
   :cljsbuild {
-    :builds [{:id "dev"
-              :source-paths ["src" "test"]
+              :builds [{:id           "dev"
+                        :source-paths ["src" "test"]
 
-              :figwheel { :on-jsload "fefwmega-core.test-runner/run" }
+                        :figwheel     {:on-jsload "fefwmega-core.test-runner/run"}
 
-              :compiler {:main fefwmega-core.core
-                         :optimizations :none
-                         :asset-path "js/compiled/out"
-                         :output-to "resources/public/js/compiled/fefwmega_core.js"
-                         :output-dir "resources/public/js/compiled/out"
-                         :source-map-timestamp true }}
-             {:id "min"
-              :source-paths ["src"]
-              :compiler {:output-to "target/fefwmega_core.min.js"
-                         :main fefwmega-core.core
-                         :optimizations :advanced
-                         :pretty-print false}}]}
+                        :compiler     {:main                 fefwmega-core.core
+                                       :optimizations        :none
+                                       :asset-path           "js/compiled/out"
+                                       :output-to            "resources/public/js/compiled/fefwmega_core.js"
+                                       :output-dir           "resources/public/js/compiled/out"
+                                       :source-map-timestamp true}}
+                       {:id           "min"
+                        :source-paths ["src"]
+                        :compiler     {:output-to     "target/fefwmega_core.min.js"
+                                       :main          fefwmega-core.core
+                                       :optimizations :advanced
+                                       :pretty-print  false}}]}
 
   :figwheel {
              ;; :http-server-root "public" ;; default and assumes "resources" 
