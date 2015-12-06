@@ -13,13 +13,25 @@
   <div class="mdl-layout__content">
     <div class="ffmg-page-content">
 
-    <div class="ffmg-deck-row" ng-repeat="tiles in main.game.cards">
-      <ng-repeat class="ffmg-card-wrapper"
-                 ng-repeat="tile in tiles"
-                 ng-click="main.flipTile(main.game, $parent.$index, $index)">
-          <img ng-src="{{ (tile['flipped'] || tile['picked']) ? main.getCardPicture(tile['value']) : 'assets/images/yeoman.png'}}"/>
-      </ng-repeat>
-    </div>
+      <div class="ffmg-deck-row" ng-repeat="tiles in main.game.cards">
+        <ng-repeat class="ffmg-deck-cell"
+                   ng-style="main.cardStyle"
+                   ng-repeat="tile in tiles"
+                   ng-click="main.flipTile(main.game, $parent.$index, $index)">
+          <div class="ffmg-card-wrapper">
+            <div class="ffmg-card" ng-class="{flipped: (tile['flipped'] || tile['picked'])}">
+              <figure class="ffmg-card--back">
+                <img
+                  ng-src="{{ main.getCardPicture(tile['value']) }}"/>
+              </figure>
+              <figure class="ffmg-card--front">
+                <img src="assets/images/card-bg.png"/>
+
+              </figure>
+            </div>
+          </div>
+        </ng-repeat>
+      </div>
     </div>
   </div>
 

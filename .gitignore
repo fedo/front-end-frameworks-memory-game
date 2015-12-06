@@ -2,3 +2,7 @@
 *.iml
 fefwmega_core.min.js
 pom.xml
+fefwmega-angularjs-1/src/assets/images
+fefwmega-om/resources/public/images
+fefwmega-om/resources/public/css
+fefwmega-angularjs-1/src/app/css

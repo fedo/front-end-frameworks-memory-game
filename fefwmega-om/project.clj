@@ -14,10 +14,15 @@
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-figwheel "0.3.5"]
+            [lein-resource "15.10.1"]
             [lein-sass "0.3.0"]]
 
-  :sass {:src              "../fefwmega-core/resources/sass" ;; TODO clean up, dirty workaround
+  :sass {:src              "../fefwmega-core/resources/scss" ;; TODO clean up, dirty workaround
          :output-directory "resources/public/css"}
+
+  :resource {:resource-paths [["../fefwmega-core/resources/images"
+                               {:target-path "resources/public/images"}]]
+             :skip-stencil [ #"../.*" ]}
 
   :source-paths ["src"]
 

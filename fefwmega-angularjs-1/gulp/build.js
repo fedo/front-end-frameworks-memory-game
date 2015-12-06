@@ -3,6 +3,8 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var sass = require('gulp-sass');
+
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -86,6 +88,11 @@ gulp.task('other', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
+gulp.task('assets', function(){
+  return gulp.src(['../fefwmega-core/resources/images/**/*'])
+    .pipe(gulp.dest('src/assets/images'));
+});
+
 gulp.task('clean', function (done) {
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
@@ -96,4 +103,14 @@ gulp.task('copy-core-game', function(done){
     .pipe(gulp.dest(path.join(conf.paths.src, '/js/')));
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('sass', function () {
+  gulp.src('../fefwmega-core/resources/scss/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('src/app/css'));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch('../fefwmega-core/resources/**/*.scss', ['sass']);
+});
+
+gulp.task('build', ['sass', 'assets', 'html', 'fonts', 'other']);
