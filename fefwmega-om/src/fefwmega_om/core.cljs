@@ -12,6 +12,13 @@
 (def images
   ["angular.png" "browsersync.png" "gulp.png" "jasmine.png" "karma.png" "protractor.png"])
 
+(defn card-component
+  [data owner]
+  (reify
+    om/IRender
+    (render [_]
+      (let [{:keys [column-idx card]} data]))))
+
 
 (om/root
   (fn [app-state owner]
@@ -19,10 +26,12 @@
       (render [_]
         (let [cards (-> app-state :game :cards)]
           (sab/html [:div.mdl-layout__container
-                     [:div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
-                      [:header.mdl-layout__header.is-casting-shadow
+                     [:div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout__header--transparent
+                      [:header.mdl-layout__header.mdl-layout__header--transparent
                        [:div.mdl-layout__header-row
-                        [:span.mdl-layout-title "Front-End Frameworks Memory Game"]]]
+                        [:span.mdl-layout-title.mdl-color-text--red "FEFWMEGA"]]]
+                      [:div.mdl-layout__drawer-button
+                       [:i.material-icons "menu"]]
                       [:div.mdl-layout__content
                        (into [:div.page-content]
                          (vector
