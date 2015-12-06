@@ -21,7 +21,7 @@
 
   :cljsbuild {
     :builds [{:id "dev"
-              :source-paths ["src"]
+              :source-paths ["src" "../fefwmega-core/src"]
 
               :figwheel { :on-jsload "fefwmega-om.core/on-js-reload" }
 
