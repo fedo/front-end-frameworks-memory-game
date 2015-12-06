@@ -1,10 +1,21 @@
 
 
-.page-content {
+.ffmg-page-content {
     position: absolute;
     bottom: 0;
     left:0;
     right:0;
     margin-left:auto;
     margin-right:auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.ffmg-deck-row {
+    display: table;
+    margin: 0 auto;
+}
+
+.ffmg-deck-cell {
+    display: inline-block;
 }

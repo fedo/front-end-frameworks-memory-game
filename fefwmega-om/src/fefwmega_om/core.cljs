@@ -40,13 +40,11 @@
                       [:div.mdl-layout__drawer-button
                        [:i.material-icons "menu"]]
                       [:div.mdl-layout__content
-                       (into [:div.page-content]
+                       (into [:div.ffmg-page-content]
                          (vector
                            (map-indexed
                              (fn [line-idx line]
-                               (into [:div.mdl-grid.mdl-grid--no-spacing
-                                      {:style {:display "table"
-                                               :margin "0 auto"}}]
+                               (into [:div.ffmg-deck-row]
                                  (vector (map-indexed
                                            (fn [column-idx card]
                                              (let [top-padding "90px"
@@ -54,10 +52,9 @@
                                                                  (str (/ 100 n-columns) unit))
                                                    adjust-height (fn [n-lines]
                                                                    (str "calc(" (/ 100 n-lines) "vh - " (str (/ 64 n-lines)) "px)"))]
-                                               [:div.mdl-typography--text-center
+                                               [:div.ffmg-deck-cell
                                               {:style
-                                               {:display :inline-block
-                                                :max-height (adjust-height (count cards))
+                                               {:max-height (adjust-height (count cards))
                                                 :max-width  (adjust-height (count cards))
                                                 :height     (calc-height (count cards) "vw")
                                                 :width      (calc-height (count cards) "vw")}
@@ -67,18 +64,20 @@
                                                    [game (game/pick-card (-> app-state :game) line-idx column-idx)]
                                                    (println game)
                                                    game))}
-                                              [:div (str (-> card :selected))]
                                               (let
                                                 [src (str "images/logos/"
                                                        (get images (:value card)))]
-                                                [:img {:style
+                                                [:div {:style
                                                        {:height "100%"
-                                                        :max-width "100%"}
+                                                        :max-width "100%"}}
+                                                 [:img {:style
+                                                        {:height "100%"
+                                                         :max-width "100%"}
                                                        :src
                                                        (if (or (-> card :flipped)
                                                                (-> card :picked))
                                                          src
-                                                         "images/card-bg.png")}]
+                                                         "images/card-bg.png")}]]
                                                 )]))
                                            line))))
                              cards)))]]])))))
