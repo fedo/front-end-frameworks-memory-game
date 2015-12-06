@@ -47,38 +47,35 @@
                                (into [:div.ffmg-deck-row]
                                  (vector (map-indexed
                                            (fn [column-idx card]
-                                             (let [top-padding "90px"
+                                             (let [top-padding 64
                                                    calc-height (fn [n-columns unit]
                                                                  (str (/ 100 n-columns) unit))
                                                    adjust-height (fn [n-lines]
-                                                                   (str "calc(" (/ 100 n-lines) "vh - " (str (/ 64 n-lines)) "px)"))]
+                                                                   (str "calc(" (/ 100 n-lines) "vh - " (str (/ top-padding n-lines)) "px)"))]
                                                [:div.ffmg-deck-cell
-                                              {:style
-                                               {:max-height (adjust-height (count cards))
-                                                :max-width  (adjust-height (count cards))
-                                                :height     (calc-height (count cards) "vw")
-                                                :width      (calc-height (count cards) "vw")}
-                                               :on-click
-                                               #(om/update! app-state [:game]
-                                                 (let
-                                                   [game (game/pick-card (-> app-state :game) line-idx column-idx)]
-                                                   (println game)
-                                                   game))}
-                                              (let
-                                                [src (str "images/logos/"
-                                                       (get images (:value card)))]
-                                                [:div {:style
-                                                       {:height "100%"
-                                                        :max-width "100%"}}
-                                                 [:img {:style
-                                                        {:height "100%"
-                                                         :max-width "100%"}
-                                                       :src
-                                                       (if (or (-> card :flipped)
-                                                               (-> card :picked))
-                                                         src
-                                                         "images/card-bg.png")}]]
-                                                )]))
+                                                {:style
+                                                 {:max-height (adjust-height (count cards))
+                                                  :max-width  (adjust-height (count cards))
+                                                  :height     (calc-height (count cards) "vw")
+                                                  :width      (calc-height (count cards) "vw")}
+                                                 :on-click
+                                                 #(om/update! app-state [:game]
+                                                   (let
+                                                     [game (game/pick-card (-> app-state :game) line-idx column-idx)]
+                                                     (println game)
+                                                     game))}
+                                                (let
+                                                  [show-back? (or (-> card :flipped)
+                                                                  (-> card :picked))
+                                                   src (str "images/logos/"
+                                                         (get images (:value card)))]
+                                                  [:div.ffmg-card-wrapper
+                                                   [:div.ffmg-card
+                                                    {:class (when show-back? "flipped")}
+                                                    [:figure.ffmg-card--front
+                                                     [:img {:src "images/card-bg.png"}]]
+                                                    [:figure.ffmg-card--back
+                                                     [:img {:src src}]]]])]))
                                            line))))
                              cards)))]]])))))
   app-state
